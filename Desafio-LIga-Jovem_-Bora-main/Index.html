@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BORA – Junto. É Fácil. É Bora.</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a href="Index.html" class="nav-logo">bora</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#funcionalidades">Funcionalidades</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
+    <li><a href="#educacao">Educação Financeira</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="Criação_de_Conta.html" class="nav-cta">Criar minha conta ✦</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg-orb orb1"></div>
+  <div class="hero-bg-orb orb2"></div>
+  <div class="hero-bg-orb orb3"></div>
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">🎓 Para estudantes do ensino médio</div>
+      <h1>A viagem dos seus <span>sonhos começa</span> agora</h1>
+      <p class="hero-sub">
+        O BORA é a plataforma financeira feita para planejar, poupar e realizar a viagem de formatura da sua turma — desde o primeiro ano do ensino médio.
+      </p>
+      <div class="hero-btns">
+        <a href="Criação_de_Conta.html" class="btn-primary">Começar a guardar ✦</a>
+        <a href="#como-funciona" class="btn-ghost">Ver como funciona</a>
+      </div>
+      <div class="trust-strip">
+        <span>🔒 100% seguro</span>
+        <span class="divider">·</span>
+        <span>✅ Gratuito para alunos</span>
+        <span class="divider">·</span>
+        <span>🏦 Regulado pelo Bacen</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="wallet-card">
+        <div class="wallet-header">
+          <div>
+            <div class="wallet-label">Minha carteira BORA</div>
+            <div class="wallet-amount">R$ <span>1.890</span></div>
+          </div>
+          <div class="wallet-avatar">🎓</div>
+        </div>
+        <div class="wallet-progress-label">
+          <span>Progresso da turma</span>
+          <span>63%</span>
+        </div>
+        <div class="wallet-bar"><div class="wallet-fill"></div></div>
+        <div class="wallet-meta">
+          <div class="wallet-meta-item">
+            <div class="wm-label">Meta total</div>
+            <div class="wm-val">R$ 3.000</div>
+          </div>
+          <div class="wallet-meta-item">
+            <div class="wm-label">Próximo depósito</div>
+            <div class="wm-val">15 jul</div>
+          </div>
+          <div class="wallet-meta-item">
+            <div class="wm-label">Meses restantes</div>
+            <div class="wm-val">18 meses</div>
+          </div>
+          <div class="wallet-meta-item">
+            <div class="wm-label">Alunos na turma</div>
+            <div class="wm-val">34 alunos</div>
+          </div>
+        </div>
+        <div class="wallet-notification">
+          <span class="notif-dot"></span>
+          <span>💰 Ana depositou R$150 agora há pouco</span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hs-num"><span class="counter" data-target="12000" data-suffix="k" data-divisor="1000">+12k</span></div>
+          <div class="hs-lbl">Alunos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num"><span class="counter" data-target="340" data-suffix="+">340+</span></div>
+          <div class="hs-lbl">Turmas</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num"><span class="counter" data-target="98" data-suffix="%">98%</span></div>
+          <div class="hs-lbl">Satisfação</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ─── -->
+<section class="how" id="como-funciona">
+  <div class="how-inner">
+    <div class="how-head reveal">
+      <div class="section-tag">Como funciona</div>
+      <h2 class="section-title" style="text-align:center;">Do primeiro ano até o <span class="hl">embarque</span></h2>
+      <p class="section-sub" style="text-align:center;">Quatro passos simples para transformar o sonho da formatura em realidade sem pesar no bolso da família.</p>
+    </div>
+    <div class="steps-wrapper">
+      <div class="steps-connector"></div>
+      <div class="steps">
+        <div class="step-card reveal" style="transition-delay:0.1s">
+          <div class="step-icon-wrap"><span class="step-icon">👥</span></div>
+          <div class="step-num">01</div>
+          <h3>Crie sua turma</h3>
+          <p>O professor ou líder de turma cria o grupo no BORA e convida todos os colegas. Tudo em menos de 5 minutos.</p>
+        </div>
+        <div class="step-card reveal" style="transition-delay:0.2s">
+          <div class="step-icon-wrap"><span class="step-icon">💳</span></div>
+          <div class="step-num">02</div>
+          <h3>Deposite no seu ritmo</h3>
+          <p>Cada aluno deposita valores flexíveis mensalmente na carteira digital. R$50, R$100, R$200 — o quanto puder.</p>
+        </div>
+        <div class="step-card reveal" style="transition-delay:0.3s">
+          <div class="step-icon-wrap"><span class="step-icon">💘</span></div>
+          <div class="step-num">03</div>
+          <h3>Encontre turmas parceiras</h3>
+          <p>Com o Tinder de Turmas, encontre grupos com orçamento similar para dividir custos e aumentar o poder de compra.</p>
+        </div>
+        <div class="step-card reveal" style="transition-delay:0.4s">
+          <div class="step-icon-wrap"><span class="step-icon">✈️</span></div>
+          <div class="step-num">04</div>
+          <h3>Lance o leilão e viaje</h3>
+          <p>Operadoras disputam o menor preço pelo seu roteiro. Você escolhe a melhor proposta e parte em grande estilo!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES ─── -->
+<section class="features" id="funcionalidades">
+  <div class="features-inner">
+    <div class="features-head reveal">
+      <div class="section-tag">Funcionalidades</div>
+      <h2 class="section-title">Três produtos que <span class="hl">transformam</span> a viagem de formatura</h2>
+      <p class="section-sub">Tecnologia e turismo colaborativo juntos pela primeira vez para democratizar o acesso ao lazer estudantil.</p>
+    </div>
+    <div class="features-grid">
+
+      <div class="feat-card card-tinder reveal" style="transition-delay:0.1s">
+        <div class="feat-icon">💘</div>
+        <div class="feat-badge">Match de Turmas</div>
+        <h3>Tinder de Turmas</h3>
+        <p>Conectamos turmas com o mesmo orçamento para dividir pacotes, ônibus e hospedagem — multiplicando o poder de compra de todos.</p>
+        <div class="tinder-mini">
+          <div class="tinder-chip chip1"><span class="dot"></span> 3ºA – SP – R$2.800</div>
+          <div class="tinder-chip chip2"><span class="dot"></span> 3ºB – RJ – R$3.100</div>
+          <div class="tinder-chip chip3"><span class="dot"></span> 3ºC – BH – R$2.950</div>
+        </div>
+        <a href="#" class="feat-link">Fazer match agora →</a>
+      </div>
+
+      <div class="feat-card card-surprise reveal" style="transition-delay:0.2s">
+        <div class="feat-icon">🎯</div>
+        <div class="feat-badge">Leilão reverso</div>
+        <h3>Destino Surpresa</h3>
+        <p>Lance o orçamento da sua turma e deixe as operadoras disputarem entre si. O melhor preço vence — e você só paga o mínimo.</p>
+        <div class="saving-display">
+          <div class="saving-label">▼ Economia média por aluno</div>
+          <div class="saving-amount">R$ 480</div>
+        </div>
+        <a href="#" class="feat-link">Ver como funciona →</a>
+      </div>
+
+      <div class="feat-card card-lego reveal" style="transition-delay:0.3s">
+        <div class="feat-icon">🧩</div>
+        <div class="feat-badge">Compra direta</div>
+        <h3>Turismo Lego</h3>
+        <p>Monte a viagem perfeita peça por peça: escolha o transporte, a hospedagem, os passeios e os serviços que sua turma realmente quer.</p>
+        <div class="lego-pieces">
+          <span class="lego-piece">🚌 Ônibus</span>
+          <span class="lego-piece">🏨 Hotel</span>
+          <span class="lego-piece">🎡 Passeios</span>
+          <span class="lego-piece">📸 Fotógrafo</span>
+          <span class="lego-piece">🍽️ Refeições</span>
+          <span class="lego-piece">🛡️ Seguro</span>
+        </div>
+        <a href="#" class="feat-link">Montar minha viagem →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TINDER DE TURMAS DEMO ─── -->
+<section class="swipe-demo">
+  <div class="swipe-inner">
+    <div class="swipe-text reveal">
+      <div class="section-tag">Tinder de Turmas</div>
+      <h2 class="section-title">Encontre sua <span class="hl">turma perfeita</span> de viagem</h2>
+      <p>Algoritmo inteligente que conecta grupos com orçamento, destino e datas compatíveis. Quando há match, a economia começa.</p>
+      <ul class="benefit-list">
+        <li>Divisão automática de custos de transporte</li>
+        <li>Hospedagem compartilhada com mais espaço e menos custo</li>
+        <li>Desconto em ingressos e passeios em grupo</li>
+        <li>Segurança de viajar com mais pessoas</li>
+      </ul>
+    </div>
+
+    <div class="swipe-visual reveal" style="transition-delay:0.2s">
+      <div id="matchOverlay" class="match-overlay">
+        <div class="match-content">
+          <div class="match-hearts">💘</div>
+          <div class="match-title">É um Match!</div>
+          <div class="match-sub">Turma 3ºC + sua turma combinam 🎉</div>
+        </div>
+      </div>
+      <div class="card-stack" id="cardStack">
+        <div class="turma-card tc3">
+          <div class="tc-school">🏫 Colégio São Paulo • SP</div>
+          <div class="tc-name">Turma 3ºA - 2026</div>
+          <div class="tc-budget"><span class="tc-budget-pill">R$2.500 – R$3.000 por aluno</span></div>
+          <div class="tc-tags">
+            <span class="tc-tag">🌊 Praia</span><span class="tc-tag">📅 Janeiro</span><span class="tc-tag">32 alunos</span>
+          </div>
+        </div>
+        <div class="turma-card tc2">
+          <div class="tc-school">🏫 Instituto Federal • BH</div>
+          <div class="tc-name">Turma 3ºB - 2026</div>
+          <div class="tc-budget"><span class="tc-budget-pill">R$2.800 – R$3.200 por aluno</span></div>
+          <div class="tc-tags">
+            <span class="tc-tag">⛰️ Serra</span><span class="tc-tag">📅 Fevereiro</span><span class="tc-tag">28 alunos</span>
+          </div>
+        </div>
+        <div class="turma-card tc1" id="topCard">
+          <div class="tc-school">🏫 CEFET-RJ • Rio de Janeiro</div>
+          <div class="tc-name">Turma 3ºC - 2026</div>
+          <div class="tc-budget"><span class="tc-budget-pill">R$2.600 – R$3.100 por aluno</span></div>
+          <div class="tc-tags">
+            <span class="tc-tag">🌊 Praia</span><span class="tc-tag">📅 Janeiro</span><span class="tc-tag">36 alunos</span>
+          </div>
+          <div class="tc-actions">
+            <button class="tc-btn pass" id="btnPass" title="Passar">✕ Passar</button>
+            <button class="tc-btn match" id="btnMatch" title="Match!">💘 Match!</button>
+          </div>
+        </div>
+      </div>
+      <div class="swipe-hint">← Arrastar para passar &nbsp;|&nbsp; Arrastar para match →</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DESTINO SURPRESA ─── -->
+<section class="destino">
+  <div class="destino-inner">
+    <div class="reveal">
+      <div class="section-tag">Destino Surpresa</div>
+      <h2 class="section-title">Operadoras competindo pelo <span class="hl">seu dinheiro</span></h2>
+      <p class="section-sub">Você define o orçamento, elas fazem a proposta. Transparência total, melhor preço garantido.</p>
+    </div>
+    <div class="auction-visual reveal" style="transition-delay:0.2s">
+      <div class="auction-card">
+        <div class="auction-header">
+          <div>
+            <div class="auction-live-badge"><span class="live-dot"></span> Leilão ao vivo</div>
+            <h3>Turma 3ºA – Fortaleza CE 🌊</h3>
+            <div class="auction-meta">32 alunos · 5 dias restantes</div>
+          </div>
+          <div class="auction-timer" id="timer">23:47:12</div>
+        </div>
+        <div class="bids">
+          <div class="bid-row best">
+            <div class="bid-rank">🏆</div>
+            <div class="bid-agency">Turismo Alegria</div>
+            <div class="bid-bar-wrap"><div class="bid-bar" style="width:88%"></div></div>
+            <div class="bid-price">R$ 2.480</div>
+            <span class="best-badge">Melhor</span>
+          </div>
+          <div class="bid-row">
+            <div class="bid-rank">2º</div>
+            <div class="bid-agency">Sol e Mar Viagens</div>
+            <div class="bid-bar-wrap"><div class="bid-bar" style="width:72%"></div></div>
+            <div class="bid-price">R$ 2.690</div>
+          </div>
+          <div class="bid-row">
+            <div class="bid-rank">3º</div>
+            <div class="bid-agency">Brasil Formandos</div>
+            <div class="bid-bar-wrap"><div class="bid-bar" style="width:60%"></div></div>
+            <div class="bid-price">R$ 2.810</div>
+          </div>
+          <div class="bid-row">
+            <div class="bid-rank">4º</div>
+            <div class="bid-agency">Vamos Turismo</div>
+            <div class="bid-bar-wrap"><div class="bid-bar" style="width:48%"></div></div>
+            <div class="bid-price">R$ 2.950</div>
+          </div>
+        </div>
+        <div class="auction-footer">
+          <div class="auction-saving">
+            <span class="saving-tag">💰 Você economizaria</span>
+            <span class="saving-val">R$ 470 por aluno</span>
+          </div>
+          <button class="btn-accept">Aceitar melhor oferta ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DEPOIMENTOS ─── -->
+<section class="testimonials" id="depoimentos">
+  <div class="testimonials-inner">
+    <div class="testimonials-head reveal">
+      <div class="section-tag">Depoimentos</div>
+      <h2 class="section-title" style="text-align:center;">Quem usou o BORA <span class="hl">nunca esqueceu</span></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="test-card reveal" style="transition-delay:0.1s">
+        <div class="test-stars">★★★★★</div>
+        <p>"O BORA mudou tudo pra nossa turma. A gente pensava que era impossível viajar com o orçamento que tínhamos. Fizemos match com outra escola e dividimos o ônibus — economizamos R$600 por aluno!"</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#6B21E8,#EC4899)">MF</div>
+          <div>
+            <div class="test-name">Maria Fernanda, 18</div>
+            <div class="test-school">ETEC Centro Paula Souza • SP</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:0.2s">
+        <div class="test-stars">★★★★★</div>
+        <p>"Comecei a guardar no primeiro ano do ensino médio, R$80 por mês. Quando chegou a hora de viajar, eu tinha mais do que o suficiente — e ainda aprendi a planejar meu dinheiro de verdade."</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#EC4899,#F97316)">LO</div>
+          <div>
+            <div class="test-name">Lucas Oliveira, 17</div>
+            <div class="test-school">IF Sudeste MG • Muriaé</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:0.3s">
+        <div class="test-stars">★★★★★</div>
+        <p>"Como professora, fiquei impressionada com o engajamento. Os alunos começaram a entender finanças na prática. O Destino Surpresa foi um sucesso — conseguimos Caldas Novas por um preço incrível!"</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(135deg,#2AFADF,#6B21E8)">PS</div>
+          <div>
+            <div class="test-name">Profa. Patrícia Santos</div>
+            <div class="test-school">Colégio Estadual Dom Bosco • GO</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EDUCATION ─── -->
+<section class="education" id="educacao">
+  <div class="education-inner">
+    <div class="reveal">
+      <div class="section-tag">Educação Financeira</div>
+      <h2 class="section-title">Aprenda enquanto <span class="hl">realiza seu sonho</span></h2>
+      <p class="edu-desc">O BORA não é só uma carteira digital. É uma escola de finanças na prática. Cada depósito ensina planejamento, disciplina e o poder dos juros do tempo.</p>
+      <ul class="benefit-list">
+        <li>Metas visuais que motivam a poupar todo mês</li>
+        <li>Relatórios de progresso individuais e da turma</li>
+        <li>Simulações de quanto rendem seus depósitos</li>
+        <li>Certificado de educação financeira ao concluir</li>
+      </ul>
+    </div>
+    <div class="edu-visual reveal" style="transition-delay:0.2s">
+      <div class="edu-card">
+        <div class="edu-icon">📈</div>
+        <h4>Rendimento acumulado</h4>
+        <p>Seu dinheiro rendendo enquanto você planeja</p>
+        <div class="edu-val">+8,2%</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">🎯</div>
+        <h4>Meta atingida</h4>
+        <p>Turmas que usam o BORA chegam à meta</p>
+        <div class="edu-val">94%</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">⏱️</div>
+        <h4>Tempo médio de poupança</h4>
+        <p>Do primeiro depósito até a viagem</p>
+        <div class="edu-val">28 meses</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">💰</div>
+        <h4>Economia por aluno</h4>
+        <p>Comparado com agências tradicionais</p>
+        <div class="edu-val">R$650</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section">
+  <div class="cta-bg-orb cta-orb1"></div>
+  <div class="cta-bg-orb cta-orb2"></div>
+  <div class="cta-inner reveal">
+    <div class="cta-emoji">✈️</div>
+    <h2>Junto. É Fácil. É Bora.</h2>
+    <p>Não espere a última hora. Comece a guardar agora e chega na formatura com a viagem dos sonhos garantida.</p>
+    <div class="cta-btns">
+      <a href="Criação_de_Conta.html" class="btn-white">Criar conta gratuita ✦</a>
+      <button class="btn-outline-white">Sou professor / escola</button>
+    </div>
+    <div class="cta-trust">
+      <span>✅ Gratuito</span>
+      <span>·</span>
+      <span>🔒 Dados seguros</span>
+      <span>·</span>
+      <span>❌ Sem cartão de crédito</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-brand">
+    <div class="fb-logo">bora</div>
+    <p>Ecossistema financeiro e turístico feito para estudantes do ensino médio realizarem sua viagem de formatura.</p>
+    <div class="footer-social">
+      <a href="#" class="social-link">Instagram</a>
+      <a href="#" class="social-link">TikTok</a>
+      <a href="#" class="social-link">WhatsApp</a>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Produto</h4>
+    <ul>
+      <li><a href="#">Carteira Digital</a></li>
+      <li><a href="#">Tinder de Turmas</a></li>
+      <li><a href="#">Destino Surpresa</a></li>
+      <li><a href="#">Turismo Lego</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Para escolas</h4>
+    <ul>
+      <li><a href="#">Programa Escolar</a></li>
+      <li><a href="#">Professores</a></li>
+      <li><a href="#">Parceiros</a></li>
+      <li><a href="#">Operadoras</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Empresa</h4>
+    <ul>
+      <li><a href="#">Sobre o BORA</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Imprensa</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 <span>BORA</span> Tecnologia e Turismo Ltda. Todos os direitos reservados.</p>
+  <p class="footer-reg">CNPJ 00.000.000/0001-00 · Regulado pelo Banco Central do Brasil</p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

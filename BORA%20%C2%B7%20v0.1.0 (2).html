@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b0a3d">
+<meta name="application-version" content="0.1.0">
+<title>BORA · A formatura como projeto de 3 anos · v0.1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<style>
+:root{box-sizing:border-box;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);--roxo:#1b0a3d;--marinho:#0a1236;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:#0a1236;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;font-family:'Sora',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#fff;background:#0a1236;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(160deg,var(--roxo),var(--marinho))}
+.glass{background:rgba(40,25,90,.6);border:1px solid rgba(255,255,255,.1);border-radius:1.5rem}
+@supports((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:rgba(255,255,255,.06);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}}
+.neon{background:linear-gradient(90deg,#ff2d95,#ff8a3d 55%,#b388ff);color:#fff}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+input:not([type=checkbox]):not([type=range]),select,textarea{font-size:16px!important;-webkit-appearance:none;appearance:none}
+input[type=checkbox]{width:22px;height:22px;flex:none}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #ff8a3d;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="root"><noscript><p style="padding:24px;text-align:center">Ative o JavaScript para usar o BORA.</p></noscript></div>
+<script>
+(() => {
+  if(!(window.React&&window.ReactDOM&&window.htm)){
+    document.getElementById('root').innerHTML='<p style="padding:24px;text-align:center">Não foi possível carregar o BORA. Verifique a conexão e tente novamente.</p>';
+    return;
+  }
+
+  const {useState,useEffect,useRef}=React;
+  const html=htm.bind((t,p,...c)=>React.createElement(t,p&&p.class!==undefined?{...p,className:p.class,class:void 0}:p,...c));
+  const R=v=>'R$ '+Math.round(Number(v)||0).toLocaleString('pt-BR');
+  const P=v=>`${(Number(v)||0).toFixed(1).replace('.',',')}%`;
+  const onlyDigits=v=>String(v||'').replace(/\D/g,'');
+  const em=v=>/^\S+@\S+\.\S+$/.test(String(v||'').trim());
+
+  // ▼ TROQUE PELOS DADOS DA SUA API — nenhum número abaixo é real
+  const DATA={turma:'3º C',escola:'Colégio Exemplo',alunosAtivos:28,mesesPassados:14,mesesRestantes:22,
+    parceiro:null /* ex.: 'Nome do parceiro BaaS' — o selo "Parceiro regulado" só aparece se preenchido */};
+
+  const LEGO=[
+    {id:'seg',nome:'Seguro viagem',icon:'🛡️',preco:180,base:1},{id:'mon',nome:'Monitoria 24h',icon:'👥',preco:120,base:1},
+    {id:'bus',nome:'Ônibus leito',icon:'🚌',preco:780},{id:'hot',nome:'Hotel · 5 diárias',icon:'🏨',preco:1240},
+    {id:'pas',nome:'Passeios',icon:'🏝️',preco:420},{id:'ref',nome:'Refeições',icon:'🍽️',preco:360},
+    {id:'vip',nome:'Festa VIP',icon:'🎉',preco:250},{id:'fot',nome:'Foto e vídeo',icon:'📸',preco:90}
+  ];
+
+  const TURMAS=[
+    {id:1,t:'Turma 3ºC',e:'Colégio Horizonte',d:'Porto Seguro',o:2800,a:32},{id:2,t:'Turma 3ºA',e:'Colégio Novo Saber',d:'Porto Seguro',o:2750,a:27},
+    {id:3,t:'Turma 2ºB',e:'Instituto Aurora',d:'Gramado',o:3100,a:40},{id:4,t:'Turma 3ºB',e:'Colégio Vértice',d:'Porto Seguro',o:2900,a:25}
+  ];
+
+  const BIDS=[
+    {n:'Rota Jovem',nota:4.8,p:2780,inc:['seguro','monitoria','hotel'],cad:1},
+    {n:'Costa Viagens',nota:4.4,p:2650,inc:['seguro','hotel'],cad:1},
+    {n:'Aventura Teen',nota:4.9,p:2910,inc:['seguro','monitoria','hotel','passeios'],cad:1}
+  ];
+  const ITENS=['seguro','monitoria','hotel','passeios'];
+
+  const CURSOS=[
+    {t:'Primeiros passos: a meta coletiva',a:['Por que poupar em grupo','Definindo a meta','Orçamento da turma','Acompanhando o progresso']},
+    {t:'Investimentos para jovens: o CDI na prática',a:['O que é o CDI','Juros compostos','Renda fixa e risco','O que o FGC cobre','Simule seu rendimento']},
+    {t:'Consumo consciente e viagens de formatura',a:['Comparar propostas','Ler o que está incluso','Agências sem Cadastur','Viajar com segurança']}
+  ];
+
+  const PERFIS=[['estudante','🎓','Estudante'],['professor','📚','Professor / Líder'],['responsavel','👪','Responsável'],['empresa','🏢','Empresa']];
+  const ACESSO={estudante:'ctgk',professor:'ctlgk',responsavel:'ck',empresa:'l'};
+  const ABAS={c:['🏠','Carteira'],t:['🔥','Turmas'],l:['⚡','Leilão'],g:['🧩','Lego'],k:['🎓','Cursos']};
+
+  const store={
+    get:k=>{try{const raw=localStorage.getItem(k)??sessionStorage.getItem(k);return raw?JSON.parse(raw):null}catch(e){return null}},
+    set:(k,v,fixo)=>{try{(fixo?localStorage:sessionStorage).setItem(k,JSON.stringify(v))}catch(e){}},
+    del:k=>{try{localStorage.removeItem(k);sessionStorage.removeItem(k)}catch(e){}}
+  };
+
+  // ▼ INTEGRAÇÃO: GitHub Pages é estático, então o login abaixo é apenas demonstração (v0.1.0).
+  // Para produção, conecte um serviço real (ex.: Supabase/Firebase Auth) e nunca salve senhas no navegador.
+  const api={
+    login:async(perfil,email,senha)=>{if(!em(email)||String(senha||'').length<6)throw Error('E-mail ou senha incorretos.');return{perfil,email,nome:email.split('@')[0]}},
+    cadastro:async d=>d
+  };
+
+  const Bar=({p})=>html`<div class="h-3 rounded-full bg-white/10 overflow-hidden"><div class="neon h-full rounded-full transition-all" style=${{width:Math.min(100,Math.max(0,Number(p)||0))+'%'}}></div></div>`;
+
+  function Carteira({meta,dep,setDep,taxa,setTaxa}){
+    const m=DATA.mesesPassados,tot=m+DATA.mesesRestantes;
+    const i=Math.pow(1+taxa/100,1/12)-1;
+    const fv=n=>i===0?dep*n:dep*(Math.pow(1+i,n)-1)/i;
+    const saldo=fv(m),dp=dep*m,rend=Math.max(0,saldo-dp),fim=fv(tot),pg=meta>0?(saldo/meta*100):0;
+    const pctDepositado=saldo>0?(dp/saldo*100):0;
+    const pctRendimento=saldo>0?100-pctDepositado:0;
+    const falta=Math.max(0,meta-fim);
+    return html`<section class="space-y-4">
+      <div class="glass p-5">
+        <p class="text-xs text-violet-200">Minha Carteira · Turma ${DATA.turma} · ${DATA.escola}</p>
+        <div class="flex items-end justify-between mt-1 gap-3"><h2 class="text-4xl font-extrabold">${R(saldo)}</h2><span class="text-sm text-violet-200">meta ${R(meta)}</span></div>
+        <div class="my-3"><${Bar} p=${pg}/></div>
+        <div class="flex justify-between gap-2 text-xs text-violet-200"><span>${P(pg)} da meta</span><span>⏳ ${DATA.mesesRestantes} meses</span><span>👥 ${DATA.alunosAtivos} ativos</span></div>
+      </div>
+      <div class="glass p-5 space-y-3">
+        <div class="flex justify-between gap-3"><b>📈 Quanto seu dinheiro rende</b><b class="text-pink-300">+${P(dp>0?rend/dp*100:0)}</b></div>
+        <div class="flex h-4 rounded-full overflow-hidden bg-white/10"><div class="bg-violet-400" style=${{width:pctDepositado+'%'}}></div><div class="neon" style=${{width:pctRendimento+'%'}}></div></div>
+        <div class="flex justify-between text-xs"><span>Depositado ${R(dp)}</span><span class="text-pink-300">Rendimento ${R(rend)}</span></div>
+        <label class="block text-xs">Depósito mensal: <b>${R(dep)}</b><input type="range" min="50" max="500" step="10" value=${dep} onChange=${e=>setDep(+e.target.value)} class="w-full accent-pink-500"/></label>
+        <label class="block text-xs">Taxa ilustrativa: <b>${taxa}% a.a.</b> (ajuste ao CDI vigente)<input type="range" min="6" max="16" step="0.5" value=${taxa} onChange=${e=>setTaxa(+e.target.value)} class="w-full accent-pink-500"/></label>
+        <p class="text-sm">${falta===0?'✅ No ritmo atual, a meta é batida até a formatura.':'⚠️ Faltam '+R(falta)+' até a formatura. Aumente o depósito.'}</p>
+        <p class="text-[11px] text-violet-300">Simulação com juros compostos, sem impostos. Rentabilidade não é garantida.</p>
+      </div>
+      <div class="glass p-5 space-y-2 text-sm">
+        <b>🔍 Transparência BORA</b>
+        <p class="text-violet-200">Onde o dinheiro fica: ${DATA.parceiro?'custodiado em '+DATA.parceiro+', em conta segregada (Banking as a Service).':'parceiro financeiro em definição. Ele será informado aqui antes de qualquer depósito.'}</p>
+        <p class="text-violet-200">Menores de 18 anos devem cadastrar um responsável legal.</p>
+        <div class="flex flex-wrap gap-2 text-xs"><span class="bg-white/10 rounded-full px-3 py-1">🔒 Dados seguros (LGPD)</span>${DATA.parceiro&&html`<span class="bg-white/10 rounded-full px-3 py-1">🏦 Parceiro financeiro regulado</span>`}</div>
+      </div>
+      <p class="text-center text-[11px] text-violet-300">Protótipo com dados de exemplo</p>
+    </section>`;
+  }
+
+  function Tinder(){
+    const [i,setI]=useState(0),[ok,setOk]=useState([]),[dx,setDx]=useState(0),st=useRef(null),c=TURMAS[i];
+    const go=y=>{if(y&&c&&!ok.some(t=>t.id===c.id))setOk(o=>[...o,c]);setDx(0);setI(n=>n+1)};
+    const grupo=DATA.alunosAtivos+ok.reduce((s,t)=>s+t.a,0);
+    return html`<section class="space-y-4">
+      <div class="glass p-4 text-sm flex justify-between"><span>🤝 Grupo formado</span><b>${grupo} alunos</b></div>
+      ${c?html`<div class="space-y-4">
+        <div class="glass p-6 touch-pan-y select-none cursor-grab" style=${{transform:`translateX(${dx}px) rotate(${dx/20}deg)`,transition:st.current==null?'transform .2s':'none'}}
+          onPointerDown=${e=>{try{e.currentTarget.setPointerCapture(e.pointerId)}catch(_){}st.current=e.clientX}}
+          onPointerMove=${e=>st.current!=null&&setDx(e.clientX-st.current)}
+          onPointerUp=${()=>{st.current=null;dx>90?go(1):dx<-90?go(0):setDx(0)}} onPointerCancel=${()=>{st.current=null;setDx(0)}}>
+          <div class="text-5xl">🎓</div><h3 class="text-xl font-bold mt-2">${c.t}</h3><p class="text-sm text-violet-200">${c.e}</p>
+          <div class="flex flex-wrap gap-2 mt-3 text-xs"><span class="neon rounded-full px-3 py-1">📍 ${c.d}</span><span class="bg-white/10 rounded-full px-3 py-1">${c.a} alunos</span><span class="bg-white/10 rounded-full px-3 py-1">${R(c.o)}/aluno</span></div>
+          <p class="text-xs text-violet-300 mt-3">${c.d==='Porto Seguro'?'Mesmo destino: dá para dividir transporte e hospedagem.':'Destino diferente do seu.'}</p>
+        </div>
+        <div class="flex justify-center gap-6"><button aria-label="Passar" onClick=${()=>go(0)} class="glass w-16 h-16 text-2xl">✕</button><button aria-label="Juntar turmas" onClick=${()=>go(1)} class="neon rounded-full w-16 h-16 text-2xl">♥</button></div>
+      </div>`:html`<div class="glass p-6 text-center text-sm">Você viu todas as turmas por enquanto. <button class="underline" onClick=${()=>{setI(0);setOk([]);setDx(0)}}>Recomeçar</button></div>`}
+      ${ok.map(t=>html`<div key=${t.id} class="glass p-3 text-sm">💜 ${t.t} · ${t.e}</div>`)}
+    </section>`;
+  }
+
+  function Leilao({on,emp}){
+    const [b,setB]=useState(()=>BIDS.map(x=>({...x,inc:[...x.inc]}))),[pick,setPick]=useState(null),[last,setLast]=useState(-1);
+    useEffect(()=>{if(!on)return;const t=setInterval(()=>{setB(current=>{const k=Math.floor(Math.random()*current.length),d=10*(1+Math.floor(Math.random()*4));setLast(k);return current.map((x,j)=>j===k?{...x,p:Math.max(2300,x.p-d)}:x)});},6000);return()=>clearInterval(t)},[on]);
+    const sc=x=>x.nota*10+x.inc.length*6-x.p/50;
+    const best=b.length?[...b].sort((x,y)=>sc(y)-sc(x))[0].n:null;
+    return html`<section class="space-y-4">
+      <div class="glass p-4 text-xs text-violet-200">⚡ Lances ao vivo (simulação). A proposta exibida em destaque considera preço, nota e itens inclusos.</div>
+      ${b.map((x,k)=>html`<div key=${x.n} class=${'glass p-5 '+(x.n===best?'ring-2 ring-orange-400':'')}>
+        ${x.n===best&&html`<span class="neon rounded-full px-3 py-1 text-xs font-bold">🏆 Oferta em destaque</span>`}
+        ${last===k&&html`<span class="ml-2 text-xs text-pink-300">↓ novo lance</span>`}
+        <div class="flex justify-between items-end mt-2 gap-3"><div><h3 class="font-bold">${x.n} ⭐ ${x.nota}</h3><p class="text-xs text-violet-300">${x.cad?'✔ Cadastur (exemplo)':''}</p></div><b class="text-2xl">${R(x.p)}</b></div>
+        <div class="flex flex-wrap gap-1 my-3">${ITENS.map(t=>html`<span key=${t} class=${'text-xs rounded-full px-2 py-1 '+(x.inc.includes(t)?'bg-emerald-400/20 text-emerald-200':'bg-white/5 text-violet-400 line-through')}>${t}</span>`)}</div>
+        <button onClick=${()=>setPick(x.n)} class=${'w-full rounded-xl py-2 text-sm font-bold '+(emp?'hidden ':'')+(pick===x.n?'bg-emerald-600':'neon')}>${pick===x.n?'✓ Proposta escolhida':'Escolher proposta'}</button>
+      </div>`)}
+      ${emp&&html`<p class="glass p-4 text-xs text-violet-200">🔎 Perfil empresa: o envio/seleção da proposta é tratado pela turma; esta tela permanece em modo demonstração.</p>`}
+    </section>`;
+  }
+
+  function Lego({sel,tog,meta}){
+    const tot=DATA.mesesPassados+DATA.mesesRestantes;
+    return html`<section class="space-y-4">
+      <div class="glass p-5"><p class="text-xs text-violet-200">Valor da viagem por aluno</p><h2 class="text-4xl font-extrabold">${R(meta)}</h2>
+        <p class="text-xs mt-1 text-violet-200">≈ ${R(meta/tot)}/mês em ${tot} meses · turma inteira: ${R(meta*DATA.alunosAtivos)}</p></div>
+      <div class="grid grid-cols-2 gap-3">${LEGO.map(x=>{const on=sel.has(x.id);return html`<button key=${x.id} onClick=${()=>!x.base&&tog(x.id)} aria-pressed=${on} class=${'glass p-4 text-left transition '+(on?'ring-2 ring-pink-400 bg-pink-500/10':'opacity-60')}>
+        <div class="text-2xl">${x.icon}</div><div class="text-sm font-semibold mt-1">${x.nome}</div>
+        <div class="text-xs text-violet-200">${x.base?'🔒 base garantida':(on?'− ':'+ ')+R(x.preco)}</div></button>`})}</div>
+    </section>`;
+  }
+
+  function Cursos(){
+    const [d,setD]=useState({});
+    return html`<section class="space-y-4">${CURSOS.map((c,k)=>{const f=c.a.filter((_,j)=>d[k+'-'+j]).length;return html`<div key=${k} class="glass p-5 space-y-2">
+      <b>${c.t}</b><${Bar} p=${f/c.a.length*100}/><p class="text-xs text-violet-300">${f} de ${c.a.length} aulas</p>
+      ${c.a.map((l,j)=>html`<label key=${j} class="flex gap-2 text-sm items-start"><input type="checkbox" class="accent-pink-500 mt-0.5" checked=${!!d[k+'-'+j]} onChange=${()=>setD(old=>({...old,[k+'-'+j]:!old[k+'-'+j]}))}/><span>${l}</span></label>`)}</div>`})}</section>`;
+  }
+
+  function Auth({onLogin}){
+    const [modo,setModo]=useState('entrar'),[perfil,setPerfil]=useState('estudante'),[ver,setVer]=useState(false),[busy,setBusy]=useState(false),[msg,setMsg]=useState(null),[fim,setFim]=useState(false);
+    const cad=modo==='criar',al=perfil==='estudante';
+    const enviar=async e=>{
+      e.preventDefault();if(busy)return;
+      const d=Object.fromEntries(new FormData(e.currentTarget));
+      const n=k=>onlyDigits(d[k]).length;
+      const senha=String(d.senha||'');
+      const erro=cad ? (!em(d.email)?'Informe um e-mail válido.':senha.length<6?'A senha precisa ter ao menos 6 caracteres.':!d.nome?'Informe o nome.':senha!==d.conf?'As senhas não conferem.':perfil==='empresa'&&n('doc')!==14?'O CNPJ precisa ter 14 dígitos.':perfil==='responsavel'&&n('doc')!==11?'O CPF precisa ter 11 dígitos.':al&&(!d.rn||n('rc')!==11||!em(d.re))?'Preencha os dados do responsável legal.':!d.lgpd?'Aceite os termos para continuar.':'') : '';
+      if(erro){setMsg(erro);return;}
+      setBusy(false);setMsg(null);
+      try{
+        if(cad){
+          const u={perfil,email:d.email,nome:d.nome||d.email.split('@')[0]};
+          store.set('bora',u,true);
+          onLogin(u);
+        }
+        else{
+          const email=String(d.email||'').trim();
+          const u={perfil,email:email||'demo@bora.app',nome:email?email.split('@')[0]:(perfil==='estudante'?'Demo Estudante':perfil==='professor'?'Demo Professor':perfil==='responsavel'?'Demo Responsável':'Demo Empresa')};
+          store.set('bora',u,!!d.lembrar);
+          onLogin(u);
+        }
+      }catch(x){setMsg(x.message||'Não foi possível concluir a operação.')}
+    };
+    const I='w-full rounded-xl bg-white/10 border border-white/10 px-4 min-h-[48px] placeholder-violet-300';
+    return html`<main class="max-w-md mx-auto px-4 py-8 space-y-5">
+      <div class="flex items-center justify-center gap-2"><h1 class="text-5xl font-extrabold text-center bg-clip-text text-transparent neon">BORA</h1><span class="glass px-2 py-1 text-[10px] font-semibold text-violet-200">v0.1.0</span></div>
+      <p class="text-center text-sm text-violet-200">A formatura é um projeto de 3 anos.</p>
+      <div class="glass p-5 space-y-4">
+        <div class="grid grid-cols-2 gap-2" role="group" aria-label="Tipo de conta">${PERFIS.map(([v,i,l])=>html`<button type="button" key=${v} aria-pressed=${perfil===v} onClick=${()=>{setPerfil(v);setMsg(null)}} class=${'min-h-[48px] rounded-xl text-sm font-semibold '+(perfil===v?'neon':'bg-white/10')}>${i} ${l}</button>`)}</div>
+        <div class="grid grid-cols-2 text-sm text-center border-b border-white/10">${[['entrar','Entrar'],['criar','Criar conta']].map(([v,l])=>html`<button type="button" key=${v} onClick=${()=>{setModo(v);setMsg(null);setFim(false)}} class=${'min-h-[48px] '+(modo===v?'font-bold border-b-2 border-pink-400':'text-violet-300')}>${l}</button>`)}</div>
+        ${fim?html`<p class="text-center text-sm py-4" role="status">✅ Cadastro concluído.</p>`
+        :html`<form onSubmit=${enviar} class="space-y-3" noValidate>
+          ${cad&&html`<input class=${I} name="nome" autoComplete="name" placeholder=${perfil==='empresa'?'Razão social':'Nome completo'} required/>`}
+          <input class=${I} name="email" type="email" inputMode="email" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck="false" placeholder="E-mail (opcional na demonstração)" required=${cad}/>
+          <div class="relative"><input class=${I+' pr-14'} name="senha" type=${ver?'text':'password'} autoComplete=${cad?'new-password':'current-password'} placeholder=${cad?"Senha (mín. 6 caracteres)":"Senha (opcional na demonstração)"} required=${cad}/><button type="button" aria-label=${ver?'Ocultar senha':'Mostrar senha'} onClick=${()=>setVer(!ver)} class="absolute right-0 top-0 h-full w-12">${ver?'🙈':'👁️'}</button></div>
+          ${cad&&html`<div class="space-y-3">
+            <input class=${I} name="conf" type="password" autoComplete="new-password" placeholder="Repita a senha" required/>
+            ${(perfil==='empresa'||perfil==='responsavel')&&html`<input class=${I} name="doc" inputMode="numeric" placeholder=${perfil==='empresa'?'CNPJ (14 dígitos)':'CPF (11 dígitos)'}/>`}
+            ${al&&html`<div class="space-y-3"><b class="text-sm block">Responsável legal (obrigatório para menores de 18)</b>
+              <input class=${I} name="rn" placeholder="Nome do responsável"/><input class=${I} name="rc" inputMode="numeric" placeholder="CPF do responsável"/><input class=${I} name="re" type="email" inputMode="email" placeholder="E-mail do responsável"/></div>`}
+            <label class="flex gap-3 text-xs text-violet-200 items-start"><input type="checkbox" name="lgpd"/> <span>Aceito os termos e o tratamento de dados conforme a LGPD.</span></label>
+          </div>`}
+          ${!cad&&html`<label class="flex gap-3 text-sm items-center min-h-[44px]"><input type="checkbox" name="lembrar"/>Manter conectado neste aparelho</label>`}
+          ${msg&&html`<p role="alert" class="text-sm text-pink-300">${msg}</p>`}
+          <button type="submit" disabled=${busy} class="neon w-full rounded-xl min-h-[48px] font-bold disabled:opacity-40">${busy?'Aguarde…':cad?'Criar conta':'Entrar'}</button>
+        </form>`}
+      </div>
+      <p class="text-center text-[11px] text-violet-300">Modo demonstração: nenhuma conta real é criada e nenhuma senha é guardada.</p>
+    </main>`;
+  }
+
+  function App(){
+    const [u,setU]=useState(()=>store.get('bora')),[tab,setTab]=useState(null),[sel,setSel]=useState(new Set(['seg','mon','bus','hot','pas','ref'])),[dep,setDep]=useState(150),[taxa,setTaxa]=useState(12);
+    if(!u||!ACESSO[u.perfil])return html`<${Auth} onLogin=${setU}/>`;
+    const abas=ACESSO[u.perfil].split(''),t=abas.includes(tab)?tab:abas[0],pf=PERFIS.find(p=>p[0]===u.perfil)||PERFIS[0];
+    const meta=LEGO.filter(x=>sel.has(x.id)).reduce((s,x)=>s+x.preco,0);
+    const tog=id=>{const n=new Set(sel);n.has(id)?n.delete(id):n.add(id);setSel(n)};
+    const sair=()=>{store.del('bora');setU(null);setTab(null)};
+    const V={c:html`<${Carteira} meta=${meta} dep=${dep} setDep=${setDep} taxa=${taxa} setTaxa=${setTaxa}/>`,t:html`<${Tinder}/>`,l:html`<${Leilao} on=${t==='l'} emp=${u.perfil==='empresa'}/>`,g:html`<${Lego} sel=${sel} tog=${tog} meta=${meta}/>`,k:html`<${Cursos}/>`};
+    return html`<div class="max-w-xl mx-auto px-4 pt-4 pb-28">
+      <header class="flex justify-between items-center gap-3 mb-4"><div class="flex items-center gap-2"><h1 class="text-3xl font-extrabold bg-clip-text text-transparent neon">BORA</h1><span class="text-[10px] text-violet-300">v0.1.0</span></div>
+        <div class="flex items-center gap-2 min-w-0"><span class="text-xs text-violet-200 truncate">${pf[1]} · ${u.nome}</span><button onClick=${sair} class="glass px-4 min-h-[44px] text-xs">Sair</button></div></header>
+      ${abas.map(k=>html`<div key=${k} class=${t===k?'':'hidden'}>${V[k]}</div>`)}
+      ${abas.length>1&&html`<nav class="fixed bottom-0 inset-x-0 border-t border-white/10 bg-[#0d0a2b]/95" style=${{paddingBottom:'calc(.5rem + env(safe-area-inset-bottom,0px))'}} aria-label="Navegação principal">
+        <div class="max-w-xl mx-auto grid pt-2" style=${{gridTemplateColumns:'repeat('+abas.length+',1fr)'}}>${abas.map(k=>html`<button key=${k} onClick=${()=>setTab(k)} aria-current=${t===k?'page':void 0} class=${'min-h-[48px] text-[11px] '+(t===k?'text-pink-300 font-bold':'text-violet-300')}><div class="text-xl">${ABAS[k][0]}</div>${ABAS[k][1]}</button>`)}</div></nav>`}
+    </div>`;
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(html`<${App}/>`);
+})();
+</script>
+</body>
+</html>
